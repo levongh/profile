@@ -6,19 +6,19 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
-	// "github.com/rs/zerolog/log"
+
+	"github.com/levongh/profile/common"
+	"github.com/levongh/profile/internal/log"
 )
 
-const ModeDevelopement = "developement"
-
 type Config struct {
-	Port        string `envconfig:"PORT" validate:"required,startswith=:"`
-	Host        string `envconfig:"HOST" validate:"required,uri"`
-	ClientHost  string `envconfig:"CLIENT_HOST" validate:"required,uri"`
-	Mode        string `envconfig:"MODE" validate:"required,oneof='local' 'development' 'staging' 'production'"`
-	ServiceName string `envconfig:"SERVICE_NAME" validate:"required"`
-	// LogLevel    log.Level `envconfig:"LOG_LEVEL"`
-	StorageDSN string `envconfig:"STORAGE_DSN" validate:"required,uri"`
+	Port        string    `envconfig:"PORT" validate:"required,startswith=:"`
+	Host        string    `envconfig:"HOST" validate:"required,uri"`
+	ClientHost  string    `envconfig:"CLIENT_HOST" validate:"required,uri"`
+	Mode        string    `envconfig:"MODE" validate:"required,oneof='local' 'development' 'staging' 'production'"`
+	ServiceName string    `envconfig:"SERVICE_NAME" validate:"required"`
+	LogLevel    log.Level `envconfig:"LOG_LEVEL"`
+	StorageDSN  string    `envconfig:"STORAGE_DSN" validate:"required,uri"`
 
 	InternalAPIUser     string `envconfig:"INTERNAL_API_USER" validate:"required"`
 	InternalAPIPassword string `envconfig:"INTERNAL_API_PASSWORD" validate:"required"`
@@ -45,5 +45,5 @@ func (c Config) HostWithoutProtocol() string {
 }
 
 func (c Config) IsNoop() bool {
-	return c.Mode == ModeDevelopement
+	return c.Mode == common.ModeDev
 }
