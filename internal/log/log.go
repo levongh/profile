@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/levongh/profile/common"
+	common "github.com/levongh/profile/common/config"
 )
 
 func NewLogger(service string, logLevel Level) (*Logger, error) {

@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
 
-	"github.com/levongh/profile/common"
+	common "github.com/levongh/profile/common/config"
 	"github.com/levongh/profile/internal/log"
 )
 
