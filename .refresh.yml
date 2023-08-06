@@ -1,0 +1,14 @@
+app_root: .
+ignored_folders:
+- bin
+included_extensions:
+- .go
+build_target_path: "./cmd"
+build_path: "/tmp"
+build_flags: []
+build_delay: 200ns
+binary_name: refresh-profile
+command_flags: []
+command_env: []
+enable_colors: true
+log_name: ""
