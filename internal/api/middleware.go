@@ -6,6 +6,8 @@ import (
 	"strings"
 
 	"github.com/labstack/echo/v4"
+	common "github.com/levongh/profile/common/config"
+	"github.com/levongh/profile/common/httpx"
 	// _ "github.com/levongh/profile/cmd/docs" // nolint:golint
 )
 
@@ -28,4 +30,14 @@ func (s *Server) makeIPCMiddleware(username, password string) func(next echo.Han
 			return next(c)
 		}
 	}
+}
+
+func (s *Server) apiGatewayAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	if s.cfg.Mode == common.ModeLocal {
+		return func(c echo.Context) error {
+			// c.Set(string(httpx.ContextKeyUserID), s.cfg.MockUserID)
+			return next(c)
+		}
+	}
+	return httpx.APIGateWayAuthMiddleware(next)
 }
